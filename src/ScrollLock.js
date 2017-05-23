@@ -10,9 +10,6 @@ import {PropTypes} from 'prop-types'
 */
 
 class ScrollLock extends Component {
-	static propTypes = {
-		scrollTarget: PropTypes.object,
-	},
 	componentDidMount() {
 		if (!this.canUseDom()) return;
 
@@ -77,6 +74,10 @@ class ScrollLock extends Component {
 		);
 	};
 }
+
+ScrollLock.propTypes = {
+  scrollTarget: PropTypes.object
+};
 
 
 
