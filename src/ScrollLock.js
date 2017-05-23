@@ -26,7 +26,7 @@ class ScrollLock extends Component {
 			scrollTarget.addEventListener('touchstart', this.preventInertiaScroll, false); // 3.
 			scrollTarget.addEventListener('touchmove', this.allowTouchMove, false); // 3.
 		}
-	},
+	}
 	componentWillUnmount () {
 		if (!this.canUseDom()) return;
 
@@ -42,17 +42,17 @@ class ScrollLock extends Component {
 			scrollTarget.removeEventListener('touchstart', this.preventInertiaScroll, false);
 			scrollTarget.removeEventListener('touchmove', this.allowTouchMove, false);
 		}
-	},
+	}
 	render () {
 		return null;
 	}
 	const preventTouchMove = (e) => {
 		e.preventDefault();
-	};
+	}
 
 	const allowTouchMove = (e) => {
 		e.stopPropagation();
-	};
+	}
 
 	const preventInertiaScroll = () => {
 		var top = this.scrollTop;
@@ -72,7 +72,7 @@ class ScrollLock extends Component {
 			&& window.document
 			&& window.document.createElement
 		);
-	};
+	}
 }
 
 ScrollLock.propTypes = {
