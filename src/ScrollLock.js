@@ -1,4 +1,5 @@
-var React = require('react');
+import React, { Component } from "react";
+import {PropTypes} from 'prop-types'
 
 /*
 	NOTES
@@ -8,12 +9,12 @@ var React = require('react');
 	3. Allow scroll on provided target.
 */
 
-var ScrollLock = React.createClass({
-	propTypes: {
-		scrollTarget: React.PropTypes.object,
+class ScrollLock extends Component {
+	static propTypes = {
+		scrollTarget: PropTypes.object,
 	},
-	componentDidMount: function () {
-		if (!canUseDom) return;
+	componentDidMount() {
+		if (!this.canUseDom()) return;
 
 		var scrollTarget = this.props.scrollTarget;
 		var scrollbarWidth = window.innerWidth - document.body.clientWidth; // 1.
@@ -22,15 +23,15 @@ var ScrollLock = React.createClass({
 		target.style.paddingRight = scrollbarWidth + 'px';
 		target.style.overflowY = 'hidden';
 
-		target.addEventListener('touchmove', preventTouchMove, false); // 2.
+		target.addEventListener('touchmove', this.preventTouchMove, false); // 2.
 
 		if (scrollTarget) {
-			scrollTarget.addEventListener('touchstart', preventInertiaScroll, false); // 3.
-			scrollTarget.addEventListener('touchmove', allowTouchMove, false); // 3.
+			scrollTarget.addEventListener('touchstart', this.preventInertiaScroll, false); // 3.
+			scrollTarget.addEventListener('touchmove', this.allowTouchMove, false); // 3.
 		}
 	},
-	componentWillUnmount: function () {
-		if (!canUseDom) return;
+	componentWillUnmount () {
+		if (!this.canUseDom()) return;
 
 		var scrollTarget = this.props.scrollTarget;
 		var target = document.body;
@@ -38,44 +39,45 @@ var ScrollLock = React.createClass({
 		target.style.paddingRight = '';
 		target.style.overflowY = '';
 
-		target.removeEventListener('touchmove', preventTouchMove, false);
+		target.removeEventListener('touchmove', this.preventTouchMove, false);
 
 		if (scrollTarget) {
-			scrollTarget.removeEventListener('touchstart', preventInertiaScroll, false);
-			scrollTarget.removeEventListener('touchmove', allowTouchMove, false);
+			scrollTarget.removeEventListener('touchstart', this.preventInertiaScroll, false);
+			scrollTarget.removeEventListener('touchmove', this.allowTouchMove, false);
 		}
 	},
-	render: function () {
+	render () {
 		return null;
 	}
-});
+	const preventTouchMove = (e) => {
+		e.preventDefault();
+	};
 
-function preventTouchMove (e) {
-	e.preventDefault();
-};
+	const allowTouchMove = (e) => {
+		e.stopPropagation();
+	};
 
-function allowTouchMove (e) {
-	e.stopPropagation();
-};
+	const preventInertiaScroll = () => {
+		var top = this.scrollTop;
+		var totalScroll = this.scrollHeight;
+		var currentScroll = top + this.offsetHeight;
 
-function preventInertiaScroll () {
-	var top = this.scrollTop;
-	var totalScroll = this.scrollHeight;
-	var currentScroll = top + this.offsetHeight;
-
-	if (top === 0) {
-		this.scrollTop = 1;
-	} else if (currentScroll === totalScroll) {
-		this.scrollTop = top - 1;
+		if (top === 0) {
+			this.scrollTop = 1;
+		} else if (currentScroll === totalScroll) {
+			this.scrollTop = top - 1;
+		}
 	}
+
+	const canUseDom = () => {
+		return !!(
+			typeof window !== 'undefined'
+			&& window.document
+			&& window.document.createElement
+		);
+	};
 }
 
-function canUseDom () {
-	return !!(
-		typeof window !== 'undefined'
-		&& window.document
-		&& window.document.createElement
-	);
-};
+
 
 module.exports = ScrollLock;
