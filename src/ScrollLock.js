@@ -49,7 +49,7 @@ class ScrollLock extends React.Component {
 	render () {
 		return null;
 	}
-	const preventTouchMove = (e) => {
+	preventTouchMove = (e) => {
 		e.preventDefault();
 	}
 
