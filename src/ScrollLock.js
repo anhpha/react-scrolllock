@@ -10,6 +10,9 @@ import {PropTypes} from 'prop-types'
 */
 
 class ScrollLock extends React.Component {
+	constructor(props){
+		super(props);
+	}
 	componentDidMount() {
 		if (!this.canUseDom()) return;
 
