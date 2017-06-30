@@ -49,15 +49,15 @@ class ScrollLock extends React.Component {
 	render () {
 		return null;
 	}
-	preventTouchMove = (e) => {
+	preventTouchMove(e){
 		e.preventDefault();
 	}
 
-	allowTouchMove = (e) => {
+	allowTouchMove(e){
 		e.stopPropagation();
 	}
 
-	preventInertiaScroll = () => {
+	preventInertiaScroll(){
 		var top = this.scrollTop;
 		var totalScroll = this.scrollHeight;
 		var currentScroll = top + this.offsetHeight;
@@ -69,7 +69,7 @@ class ScrollLock extends React.Component {
 		}
 	}
 
-	canUseDom = () => {
+	canUseDom(){
 		return !!(
 			typeof window !== 'undefined'
 			&& window.document
