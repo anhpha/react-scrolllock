@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {PropTypes} from 'prop-types'
 
 /*
@@ -9,7 +9,7 @@ import {PropTypes} from 'prop-types'
 	3. Allow scroll on provided target.
 */
 
-class ScrollLock extends Component {
+class ScrollLock extends React.Component {
 	componentDidMount() {
 		if (!this.canUseDom()) return;
 
