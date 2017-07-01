@@ -1,1 +1,2 @@
-module.exports = require('./src/ScrollLock');
+import ScrollLock from './src/ScrollLock';
+export default ScrollLock;
