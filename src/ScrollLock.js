@@ -13,6 +13,9 @@ export default class ScrollLock extends Component {
 	constructor(props){
 		super(props);
 	}
+	static propTypes = {
+	  scrollTarget: PropTypes.object
+	}
 	componentDidMount() {
 		if (!this.canUseDom()) return;
 
@@ -77,7 +80,3 @@ export default class ScrollLock extends Component {
 		);
 	}
 }
-
-ScrollLock.propTypes = {
-  scrollTarget: PropTypes.object
-};

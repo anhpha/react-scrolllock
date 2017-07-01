@@ -2,10 +2,18 @@
   "name": "react-scrolllock",
   "version": "1.0.5",
   "description": "Prevent scroll on the body when component is mounted.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jossmac/react-scrolllock.git"
+  },
+  "scripts": {
+    "test": "karma start --single-run --browsers PhantomJS",
+    "watch-test": "karma start",
+    "start": "webpack-dev-server --inline --host 0.0.0.0",
+    "build-demo": "webpack",
+    "dist": "babel ./src/ScrollLock.js --out-file ./dist/index.js",
+    "prepublish": "rm -rf dist/* && npm run dist"
   },
   "author": "Joss Mackison (https://github.com/jossmac)",
   "license": "MIT",
@@ -23,6 +31,30 @@
   },
   "dependencies": {
     "prop-types": "^15.5.8"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.0",
+    "babel-core": "^6.1.4",
+    "babel-eslint": "^4.1.5",
+    "babel-loader": "^6.1.0",
+    "babel-polyfill": "^6.1.4",
+    "babel-preset-es2015": "^6.1.4",
+    "babel-preset-react": "^6.1.4",
+    "babel-preset-stage-2": "^6.1.2",
+    "eslint": "^1.9.0",
+    "eslint-plugin-react": "^3.8.0",
+    "jasmine-core": "^2.4.1",
+    "json-loader": "^0.5.3",
+    "karma": "^0.13.19",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "^1.7.0",
+    "phantomjs-prebuilt": "^2.1.3",
+    "react": "^0.14.7",
+    "react-addons-test-utils": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "webpack": "^1.12.4",
+    "webpack-dev-server": "^1.12.1"
   },
   "homepage": "https://github.com/jossmac/react-scrolllock#readme"
 }
